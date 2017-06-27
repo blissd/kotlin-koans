@@ -1,6 +1,7 @@
 package ii_collections
 
 import util.TODO
+import java.util.*
 
 fun todoTask24(): Nothing = TODO(
     """
@@ -12,8 +13,8 @@ fun todoTask24(): Nothing = TODO(
 )
 
 fun doSomethingStrangeWithCollection(collection: Collection<String>): Collection<String>? {
-    val groupsByLength = collection.groupBy { s -> todoTask24() }
-
-    return groupsByLength.values.maxBy { group -> todoTask24() }
+    val groupsByLength = collection.groupBy { it.length }
+    val maximumSizeOfGroup = groupsByLength.values.maxBy { it.size }?.size ?: return null
+    return groupsByLength.values.find { it.size == maximumSizeOfGroup }
 }
 
