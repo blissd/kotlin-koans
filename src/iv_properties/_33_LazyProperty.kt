@@ -3,15 +3,17 @@ package iv_properties
 import util.TODO
 
 class LazyProperty(val initializer: () -> Int) {
-    var memoized: Boolean = false
-    var backing: Int? = null
+    var memoized: Int? = null
     val lazy: Int
         get() {
-            if (!memoized) {
-                memoized = true
-                backing = initializer()
+            val actualValue: Int? = memoized
+            if (actualValue == null) {
+                val init = initializer()
+                memoized = init
+                return init
+            } else {
+                return actualValue
             }
-            return backing!!
         }
 }
 
